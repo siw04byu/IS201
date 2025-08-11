@@ -7,10 +7,14 @@
     color: #0faddf;
 }
 .fontspecial {
-    -webkit-text-stroke-width: 2px; /* Adjust stroke thickness */
-        -webkit-text-stroke-color: black; /* Set stroke color */
-        -webkit-text-fill-color: 220, 220, 35; /* Make text fill transparent */
-}
+     text-shadow: 1px 1px 0 black,
+                     -1px 1px 0 black,
+                     1px -1px 0 black,
+                     -1px -1px 0 black; /* Adjust color and offset for desired effect */
+    }
+    /*     -webkit-text-stroke-width: 2px; /* Adjust stroke thickness */
+    /*         -webkit-text-stroke-color: black; /* Set stroke color */ */
+        -webkit-text-fill-color: 220, 220, 35; /* Make text fill transparent */ */
 .logostyle {
     border: solid lightblue 3px;
 }
