@@ -1,0 +1,14 @@
+#sideNav .navbar-brand .spencerprofile {
+    max-width: 17rem ; 
+    max-height: 17rem ;
+    border: 10px solid lightyellow;
+}
+.dates {
+    color: #0faddf;
+}
+.fontspecial {
+    border: solid black 2px;
+}
+.logostyle {
+    border: solid lightblue 2px;
+}
