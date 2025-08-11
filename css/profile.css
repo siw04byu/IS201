@@ -4,7 +4,7 @@
     border: 10px solid lightyellow;
 }
 .dates {
-    color: #0faddf;
+    color: #0faddf !important;
 }
 .fontspecial {
      text-shadow: 1px 1px 0 black,
