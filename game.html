@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rock Paper Scissors with Score</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .game-area {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .player,
+    .opponent {
+      width: 200px;
+    }
+    img {
+      width: 100%;
+      max-width: 150px;
+    }
+    .choices img {
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .choices img:hover {
+      transform: scale(1.1);
+    }
+    #result {
+      font-size: 1.5em;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    #scoreboard {
+      margin-top: 15px;
+      font-size: 1.2em;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+  <h1>Rock Paper Scissors</h1>
+
+  <div class="game-area">
+    <div class="player">
+      <h2>You</h2>
+      <div class="choices">
+        <img
+          src="assets/img/rock.png.webp"
+          alt="Rock"
+          onclick="playerChoice('rock')"
+        />
+        <img
+          src="assets/img/paper.png.webp"
+          alt="Paper"
+          onclick="playerChoice('paper')"
+        />
+        <img
+          src="assets/img/scissors.png.webp"
+          alt="Scissors"
+          onclick="playerChoice('scissors')"
+        />
+      </div>
+    </div>
+
+    <div class="opponent">
+      <h2>Opponent</h2>
+      <img
+        id="opponent-hand"
+        src="assets/img/rock.png.webp"
+        alt="Opponent Hand"
+      />
+    </div>
+  </div>
+
+  <div id="result">Make your move!</div>
+  <div id="scoreboard">Wins: 0 | Losses: 0 | Ties: 0</div>
+
+  <script>
+    const choices = ["rock", "paper", "scissors"];
+    const imagePaths = {
+      rock: "assets/img/rock.png.webp",
+      paper: "assets/img/paper.png.webp",
+      scissors: "assets/img/scissors.png.webp",
+    };
+
+    let shuffleInterval;
+    let wins = 0;
+    let losses = 0;
+    let ties = 0;
+
+    function startShuffle() {
+      let index = 0;
+      shuffleInterval = setInterval(() => {
+        const choice = choices[index % choices.length];
+        document.getElementById("opponent-hand").src = imagePaths[choice];
+        index++;
+      }, 150);
+    }
+
+    function stopShuffle(finalChoice) {
+      clearInterval(shuffleInterval);
+      document.getElementById("opponent-hand").src = imagePaths[finalChoice];
+    }
+
+    function updateScoreboard() {
+      document.getElementById(
+        "scoreboard"
+      ).textContent = `Wins: ${wins} | Losses: ${losses} | Ties: ${ties}`;
+    }
+
+    function checkWinner(player, opponent) {
+      let result = "";
+      if (player === opponent) {
+        result = "It's a Tie!";
+        ties++;
+      } else if (
+        (player === "rock" && opponent === "scissors") ||
+        (player === "paper" && opponent === "rock") ||
+        (player === "scissors" && opponent === "paper")
+      ) {
+        result = "You Win!";
+        wins++;
+      } else {
+        result = "You Lose!";
+        losses++;
+      }
+      document.getElementById("result").textContent = result;
+      updateScoreboard();
+    }
+
+    function playerChoice(playerPick) {
+      clearInterval(shuffleInterval);
+      startShuffle();
+
+      setTimeout(() => {
+        const opponentPick =
+          choices[Math.floor(Math.random() * choices.length)];
+        stopShuffle(opponentPick);
+        checkWinner(playerPick, opponentPick);
+      }, 1500);
+    }
+  </script>
+</body>
+</html>
